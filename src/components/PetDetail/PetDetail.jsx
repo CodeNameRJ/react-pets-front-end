@@ -4,6 +4,12 @@ const PetDetails = (props) => {
             <h1> {props.selected.name}</h1>
             <h2>Breed: {props.selected.breed}</h2>
             <h2>Age: {props.selected.age}</h2>
+            <button onClick={() => props.handleFormView(props.selected)}>
+                Edit pet
+            </button>
+            <button onClick={() => props.handleDeletePet(props.selected._id)}>
+                Delete Pet
+            </button>
 
         </div>
 

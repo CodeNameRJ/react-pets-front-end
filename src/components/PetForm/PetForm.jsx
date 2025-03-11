@@ -1,20 +1,30 @@
 import { useState } from "react"
 
+
+const DEFAULT_PET_STATE = {
+    name: '',
+    age: '',
+    breed: ''
+}
+
 const PetForm = (props) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        breed: '',
-        age: ''
-    })
+
+    const [formData, setFormData] = useState(props.selected || DEFAULT_PET_STATE)
+    // if selected pet make that be state, other wise make default state
+
+    // const [formData, setFormData] = useState({
+    //     name: '',
+    //     breed: '',
+    //     age: ''
+    // })
 
     const handleChange = (e) => {
-        setFormData((prev) => ({...prev, [e.target.name] : e.target.value })) //callback function- what ever the state is at the time, can use this instread of spread - ...FormData.. helps prevent errors (when have a form) e.target- key we are updating , e.target - value update
+        setFormData((prev) => ({...prev, [e.target.name]: e.target.value})) //callback function- what ever the state is at the time, can use this instread of spread - ...FormData.. helps prevent errors (when have a form) e.target- key we are updating , e.target - value update
     }
 
     const handleSubmit = (e) => {
         e.preventDefault() // crrate funciton that prevents refresh
-        props.handleAddPet(formData) // involks handle add pet function which takes form data as arg
-
+        props.updateFnToUse(formData) // involks handle add pet function which takes form data as arg
     }
 
 
@@ -30,6 +40,7 @@ const PetForm = (props) => {
                     type="text"
                     onChange={handleChange}
                     required
+                    value={formData.name}
                 />
 
                 <label htmlFor="Breed">Breed</label>
@@ -38,6 +49,7 @@ const PetForm = (props) => {
                     name="breed"
                     type="text"
                     onChange={handleChange}
+                    value={formData.breed}
                 />
 
                 <label htmlFor="age">Age</label>
@@ -47,8 +59,9 @@ const PetForm = (props) => {
                     type="number"
                     onChange={handleChange}
                     required
+                    value={formData.age}
                 />
-                <button type="submit">Add New Pet</button>
+                <button type="submit">{props.selected ? 'Edit Pet' : 'Add New Pet'}</button>
             </form>
         </div>
 

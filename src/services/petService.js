@@ -26,3 +26,54 @@ export const index = async () => {
 
 //default export is differet - instead of exproting an object of key value pairs, by default its exporting whole function so you can import it as somethingelse from
 // importing name is destricted { }
+
+export const create = async (petData) => {
+    try {
+        const res = await fetch(BASE_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(petData)
+        } ) // specfiy the type of content we're sending
+
+        return res.json()
+
+    } catch (err) {
+        console.log(err)
+    }
+
+}
+
+
+export const update = async (petData, id) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(petData)
+        } ) // specfiy the type of content we're sending
+
+        return res.json()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+export const deletePet = async (id) => {
+    try {
+        const res = await fetch(`${BASE_URL}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        } )
+        return res.json()
+        } catch (err) {
+        console.log(err)
+    }
+
+}
