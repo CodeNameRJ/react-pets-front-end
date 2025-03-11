@@ -11,6 +11,11 @@ export const index = async () => {
 }
 
 
+
+
+// pet service returns JSON of whats at base URL /pets -- making request to localhoost3000/pets- make request to various routes
+// back end /pets has index so it returns arrary in server
+
 // export { // creating an object with key and value of the function {index: index}
 //     index
 // }
